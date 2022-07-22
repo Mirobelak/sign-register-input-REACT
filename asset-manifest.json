@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/sign-register-input-REACT/static/css/main.d9700f37.css",
+    "main.js": "/sign-register-input-REACT/static/js/main.bfa5bec7.js",
+    "static/js/787.5e667bc4.chunk.js": "/sign-register-input-REACT/static/js/787.5e667bc4.chunk.js",
+    "static/media/photo.png": "/sign-register-input-REACT/static/media/photo.55a5072f34a8140f6865.png",
+    "index.html": "/sign-register-input-REACT/index.html",
+    "main.d9700f37.css.map": "/sign-register-input-REACT/static/css/main.d9700f37.css.map",
+    "main.bfa5bec7.js.map": "/sign-register-input-REACT/static/js/main.bfa5bec7.js.map",
+    "787.5e667bc4.chunk.js.map": "/sign-register-input-REACT/static/js/787.5e667bc4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d9700f37.css",
+    "static/js/main.bfa5bec7.js"
+  ]
+}
