@@ -1,33 +1,48 @@
 import React, { Component } from 'react';
 import './App.css';
 import Navigation from './Components/Navigation/Navigation'
+import SignComp from './Components/SignComp/SignComp'
+import Register from './Components/Register/Register'
 import Logo from './Components/Logo/Logo'
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm'
 import Rank from './Components/Rank/Rank'
-// import FaceRecognition from './Components/FaceRecognition/FaceRecognition'
-// import Clarifai from 'clarifai'
-import SignComp from './Components/SignComp/SignComp'
-import Register from './Components/Register/Register'
 
-// const app = new Clarifai.App({
-//   apiKey: 'bbd83ec4e2ec4c9dbef72cd10d3da7ff'
-//  });
+
+
 
 
 class App extends Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.state = {
       newWho:"",
-      imageUrl: "",
       route: 'signin',
       isSignedIn: false,
-      box: {},
-      characters: []
+      characters: [],
+      user: {
+
+    id: "",
+    name: "",
+    email: "",
+    entries: 0,
+    joined: ""
+      }
     }
   }
 
- 
+
+
+
+  loadUser = (data) => {
+    this.setState({user: {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.entries,
+      joined: data.joined
+    }})
+  }
+
   onInputChange = (event) => {
     this.setState({newWho: event.target.value});
   }
@@ -44,8 +59,7 @@ class App extends Component {
     this.setState({route: route})
   }
 
-
-  
+   
   listOfDudes = () => {
     return this.state.characters.map(dude => (
       
@@ -71,30 +85,20 @@ class App extends Component {
 }
 
 onButtonSubmit = (e) => {
-        e.preventDefault();
-        this.setState(state => {
-        const newDude = {
-           id: Math.max(...state.characters.map(d => d.id)) + 1,
-           who: this.state.newWho
-        }
-
-        return {
-           characters: [...state.characters, newDude]
-        }
-     })
-
-    //  this.resetForm()
+  e.preventDefault();
+  this.setState(state => {
+  const newDude = {
+     id: Math.max(...state.characters.map(d => d.id)) + 1,
+     who: this.state.newWho
   }
 
-//   resetForm = () => {
-//     this.setState({
-//        input: '',
-//     })
+  return {
+     characters: [...state.characters, newDude]
+  }
+})
+}
 
-//     this.input.current.focus()
-//  }
-
-  render() {
+render() {
     return (
       <div className="App">
         
@@ -106,10 +110,10 @@ onButtonSubmit = (e) => {
         <h1 className='white f2' >{this.state.input}</h1>
         <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
         <ul>{this.listOfDudes()}</ul>
-        {/* <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box} /> */}
         </div> 
-        : ( this.state.route === 'signin' ? <SignComp onRouteChange={this.onRouteChange}/> :
-        <Register onRouteChange={this.onRouteChange}/>)
+        : ( this.state.route === 'signin' ? 
+        <SignComp loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> :
+        <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>)
     }
     </div>
     );
